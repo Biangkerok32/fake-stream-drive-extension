@@ -190,6 +190,7 @@
 			if (data.url.includes('.google')) {
 				data.url = data.url.split('/')[5];
 			};
+			var streamStatus = 0;
 			setTimeout(function(){
 				window.postMessage({
 				    data:data,
@@ -199,13 +200,21 @@
 					if (event.data.keyStream && event.data.keyStream=='herudi') {
 						if(callback) {
 				            callback(event.data.data);
+				            streamStatus = 1;
+				        }else{
+				        	streamStatus = 2;
 				        }
 					}else{
-						$("#divSpin").hide();
-		        		$("#divText").show();
+						streamStatus = 0;
 					}
-				}, false);
+					
+				}, false);				
 			},2000);
+			setTimeout(function(){
+				if (streamStatus===0) {
+					$("#divText").show();
+				}
+			},5000)
 			
 		}
 		fakeStream(data, function(response){
