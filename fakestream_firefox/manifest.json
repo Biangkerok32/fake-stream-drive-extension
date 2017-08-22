@@ -1,0 +1,27 @@
+{
+
+  "description": "Fake Stream",
+  "manifest_version": 2,
+  "name": "Fake Stream",
+  "version": "1.1",
+  "icons": {
+    "48": "icon.png"
+  },
+  "permissions": [
+      "tabs",
+      "cookies",
+      "<all_urls>"
+  ],
+  
+  "background": {
+    "scripts": ["background.js","axios.min.js"]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["fakestream.js"],
+      "all_frames": true
+    }
+  ]
+
+}
